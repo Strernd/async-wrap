@@ -39,12 +39,11 @@ function getItems(){
     return coalesce(urls, requestItems)
 
     async function requestItems(url) {
-        var result = await request(url+'/api/items')
-        if(result.body) return body
-        else throw "No connection"
+        return asyncRequest(url+'/api/items')
     }
 }
 ```
+
 
 Same using Promise:
 ```javascript
@@ -54,9 +53,10 @@ function getItems(){
 
     function requestItems(url) {
         return new Promise((resolve, reject) => {
-            request(url+'/api/items')
-            .then(resolve)
-            .catch(reject)
+            request(url+'/api/items',(error, body) => {
+                if (error) reject(error)
+                else resolve(body)
+            })
         })
 
     }
@@ -70,9 +70,7 @@ function getItemInfo(id){
     return coalesce(urls, (url) => requestItemInfo(url,id))
 
     async function requestItemInfo(url, id) {
-        var result = await request(url+'/api/item/'+id)
-        if(result.body) return body
-        else throw "No connection"
+        return asyncRequest(url+'/api/item/'+id)
     }
 }
 ```

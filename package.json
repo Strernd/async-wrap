@@ -1,6 +1,6 @@
 {
   "name": "async-wrap",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "Library with wrapper functions for async function (or functions, that return Promises) ",
   "main": "index.js",
   "scripts": {
