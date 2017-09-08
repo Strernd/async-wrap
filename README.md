@@ -5,13 +5,13 @@ Library with wrapper functions for async function (or functions, that return Pro
 `npm install async-wrap`
 
 ## Usage
-```
+```javascript
 var asw = require('async-wrap')
 
 asw.coalesce([1,2,3],asyncfun)
 ```
 or
-```
+```javascript
 var coalesce = require('async-wrap/coalesce')
 
 coalesce([1,2,3],asyncfun)
@@ -42,6 +42,23 @@ function getItems(){
         var result = await request(url+'/api/items')
         if(result.body) return body
         else throw "No connection"
+    }
+}
+```
+
+Same using Promise:
+```javascript
+function getItems(){
+    var urls = getServiceUrls() // Returns array
+    return coalesce(urls, requestItems)
+
+    function requestItems(url) {
+        return new Promise((resolve, reject) => {
+            request(url+'/api/items')
+            .then(resolve)
+            .catch(reject)
+        })
+
     }
 }
 ```
