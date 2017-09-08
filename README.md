@@ -33,7 +33,7 @@ Accepts two parameters:
 Use coalesce to execute a async function again, when it fails, with the next element in the elements list. E.g. you have multiple instances of a service, and want to retry the request with the next service instance if you can't connect to the first service.
 
 Example:
-```
+```javascript
 function getItems(){
     var urls = getServiceUrls() // Returns array
     return coalesce(urls, requestItems)
@@ -47,7 +47,7 @@ function getItems(){
 ```
 
 With multiple parameters:
-```
+```javascript
 function getItemInfo(id){
     var urls = getServiceUrls() // Returns array
     return coalesce(urls, (url) => requestItemInfo(url,id))
