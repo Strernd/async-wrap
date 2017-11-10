@@ -14,7 +14,7 @@
 function coalesce( elements, callback ) {
     let element = elements.splice( 0, 1 )[ 0 ]
     return new Promise( ( resolve, reject ) => {
-        return callback( element ).catch( error => {
+        return callback( element ).then( resolve ).catch( error => {
             if ( elements.length ) {
                 return coalesce( elements, callback )
             } else {
